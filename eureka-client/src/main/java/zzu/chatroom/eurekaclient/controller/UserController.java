@@ -92,11 +92,16 @@ public class UserController {
     @GetMapping(value = "/rmFriend/{uid}/{fid}",consumes = "application/json")
     public boolean delFriend(@PathVariable("uid") Long uid, @PathVariable("fid") Long fid) {
        //数据库内容删除，通知其他用户删除
+        User u=new User();
+        User f=new User();
+        u.setId(uid);
+        f.setId(fid);
+        redisService.delFriend(u,f);
         return userService.delFriend(uid, fid);
     }
     @GetMapping(value = "/rmRoom/{uid}/{rid}",consumes = "application/json")
     public boolean delRoom(@PathVariable("uid")Long uid,@PathVariable("rid")Long rid){
-        //redisService.delUserToRoom();
+        redisService.delUserToRoom(rid,uid);
         return roomService.delUser(rid,uid);
     }
 

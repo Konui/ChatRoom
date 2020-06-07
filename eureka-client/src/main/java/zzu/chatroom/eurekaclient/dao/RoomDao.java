@@ -27,5 +27,5 @@ public interface RoomDao {
     //添加用户
     Boolean addUser(@Param("uid") Long uid, @Param("rid") Long rid);
     //删除用户
-    Boolean delUser(@Param("id") Long id, @Param("uid") Long uid);
+    Boolean delUser(@Param("rid") Long rid, @Param("uid") Long uid);
 }

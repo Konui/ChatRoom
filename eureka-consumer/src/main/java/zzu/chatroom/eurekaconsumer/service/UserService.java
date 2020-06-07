@@ -36,6 +36,13 @@ public class UserService {
     public boolean createRoom(Long uid, String name){return  userClient.createRoom(uid,name);}
     public boolean addRoom(Long uid,String rid){return userClient.addRoom(uid,rid);}
     public boolean updateHeadImg(Long id,String url){return userClient.updateHeadImg(id,url);}
+
+    public boolean delFriend(Long uid,Long fid){
+        return userClient.delFriend(uid,fid);
+    }
+    public boolean delRoomUser(Long uid,Long rid){
+        return userClient.delRoomUser(uid,rid);
+    }
     /*
     public String fallback(User user){
         return "当前服务繁忙，请稍后重试。";

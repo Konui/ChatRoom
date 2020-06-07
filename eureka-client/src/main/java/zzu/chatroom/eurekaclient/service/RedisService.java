@@ -40,9 +40,9 @@ public class RedisService {
         redisTemplate.opsForValue().set(RedisName.FRIENDS_ID+user.getId(),JsonUtil.parseObjToJson(list));
     }
     //用户退出房间
-    public void delUserToRoom(Room room,User user){
-        redisTemplate.opsForSet().remove(RedisName.ROOM_ID+room.getId(),user.getId());
-        redisTemplate.opsForList().remove(RedisName.FRIENDS_ID+user.getId(),1,initList.UsertoList(user));
+    public void delUserToRoom(Long rid,Long uid){
+        redisTemplate.opsForSet().remove(RedisName.ROOM_ID+rid,uid);
+        //redisTemplate.opsForList().remove(RedisName.FRIENDS_ID+user.getId(),1,initList.UsertoList(user));
     }
 
     //初始化列表

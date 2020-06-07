@@ -27,7 +27,7 @@ public interface UserDao {
     Boolean addFriend(@Param("uid1") Long id, @Param("uid2") Long fid);
 
     //删除好友
-    Boolean delFriend(@Param("id") Long id, @Param("fid") Long fid);
+    Boolean delFriend(@Param("uid") Long id, @Param("fid") Long fid);
 
     Boolean updateHeadImg(@Param("id")Long id,@Param("url") String url);
     String getName(@Param("id")Long id);

@@ -120,5 +120,30 @@ public class UserController {
         }
         return msg;
     }
+    @GetMapping("/rmFriend/{uid}/{fid}")
+    public ResponseMsg delFriend(@PathVariable("uid")Long uid,@PathVariable("fid")Long fid){
+        ResponseMsg msg=new ResponseMsg();
+        if(userService.delFriend(uid,fid)){
+            Message m=new Message();
+            m.setType("del");
+            m.setFrom_uid(uid);
+            m.setTo_uid(fid);
+            redisTemplate.convertAndSend(msgToAll, JsonUtil.parseObjToJson(m));
+            msg.setCode(200);
+            msg.setMsg("删除成功");
+        }
+        return msg;
+    }
+    @GetMapping("/rmRoom/{uid}/{rid}")
+    public ResponseMsg delRoomUser(@PathVariable("uid")Long uid ,@PathVariable("rid")Long rid){
+        ResponseMsg msg=new ResponseMsg();
+        if(userService.delRoomUser(uid,rid)){
+            msg.setCode(200);
+            msg.setMsg("退出成功");
+        }else{
+            msg.setCode(400);
+        }
+        return msg;
+    }
 
 }

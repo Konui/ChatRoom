@@ -35,8 +35,8 @@
     </insert>
 
     <delete id="delFriend">
-        delete from friends where uid1=#{uid1} and uid2=#{uid2};
-        delete from friends where uid1=#{uid2} and uid2=#{uid1};
+        delete from friends where uid1=#{uid} and uid2=#{fid};
+        delete from friends where uid1=#{fid} and uid2=#{uid};
     </delete>
 
 

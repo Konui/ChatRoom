@@ -35,4 +35,8 @@ public interface UserClient {
      boolean updateHeadImg(@RequestParam(value = "id") Long id, @RequestParam("url") String url);
     @GetMapping(value= "/name/{uid}" , consumes = "application/json")
     String getName(@PathVariable(value = "uid")Long uid);
+    @GetMapping(value = "/rmFriend/{uid}/{fid}",consumes = "application/json")
+    boolean delFriend(@PathVariable("uid")Long uid,@PathVariable("fid")Long fid);
+    @GetMapping(value = "/rmRoom/{uid}/{rid}",consumes = "application/json")
+    boolean delRoomUser(@PathVariable("uid")Long uid,@PathVariable("rid")Long rid);
 }

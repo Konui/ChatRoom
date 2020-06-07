@@ -32,6 +32,12 @@ public class chatService {
                 ws.sendMsg(initList(msg.getTo_uid()));
             }
             return;
+        }else if("del".equals(msg.getType())){
+            WebSocketServer ws =WebSocketServer.wsMap.get(msg.getTo_uid());
+            if(ws!=null){
+                ws.sendMsg(JsonUtil.parseObjToJson(msg));
+            }
+            return;
         }
         if(msg.getRoom_id()>0){
             //群发消息

@@ -42,6 +42,10 @@ function connect(un){
 				"<a href='"+res["content"]+"' target=\"_blank\"><img src='"+res["content"]+"' width=\"150\" height=\"150\"/></a>";
 			}else if(res["type"]=="file"){
 				cont="<a href='"+ res["content"]+"' target=\"_blank\" download>文件下载</a>";
+			}else if(res["type"]=="del") {
+				$("li[data-id='u"+res["from_uid"]+"']").remove();
+				$("div[data-chat='u"+res["from_uid"]+"']").remove();
+				$(".person").eq(0).click();
 			}else{
 				cont=res["content"];
 			}
@@ -96,12 +100,13 @@ function connect(un){
 				$(this).attr("class",v).siblings().attr("class","person");
 				//显示对应聊天框
 				let id=$(this).attr("data-id");
+				let idn=id.substr(1);
 				$("div[data-chat='"+id+"']").attr("class","chat-active-chat").siblings(".chat-active-chat").attr("class","chat");
 				//设置用户名
 				let name =$(this).children(".name").text();
 				$(".tname").text(name);
-				$("#rm").attr("href",);-----------------------
-				//
+				var fn=id.substr(0,1)=="u"?"delFriend("+idn+")":"delRoomUser("+idn+")";
+				$("#rm").attr("href","javascript:"+fn+";");
 				$(this).children(".redpoint").text("0");
 				$(this).children(".redpoint").hide();
 			});
@@ -174,8 +179,8 @@ function nowData() {
 function login(){
 
 	var err="";
-	if($("#username").val().length>10||$("#username").val().length<4){
-		err="用户名长度在4-10之间！";
+	if($("#username").val().length>10||$("#username").val().length<3){
+		err="用户名长度在3-10之间！";
 	}
 	if($("#password").val().length>16||$("#password").val().length<6){
 		err=err+"密码长度在6-16之间！";
@@ -224,8 +229,8 @@ function login(){
 //注册
 function zhuce(){
 	var err="";
-	if($("#username").val().length>10||$("#username").val().length<4){
-		err="用户名长度在4-10之间！";
+	if($("#username").val().length>10||$("#username").val().length<3){
+		err="用户名长度在3-10之间！";
 	}
 	if($("#password").val().length>16||$("#password").val().length<6){
 		err=err+"密码长度在6-16之间！";
@@ -304,10 +309,7 @@ function addFriend(){
 		alert("好友名不能为空");
 	}
 }
-function delFriend(){
-}
-function delRoom(){
-}
+
 function addRoom(){
 	var name = prompt("请输入要添加房间的名称");
 	if(name.length>0){
@@ -560,4 +562,32 @@ function getUserName(id){
 		}
 	});
 	return name;
+}
+function delFriend(fid){
+	$("li[data-id='u"+fid+"']").remove();
+	$("div[data-chat='u"+fid+"']").remove();
+	$(".person").eq(0).click();
+	var id=$(".uid").text();
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		url:"http://localhost:1101/c/rmFriend/"+id+"/"+fid,
+		async: false,
+		success:function(){
+		},
+	});
+}
+function delRoomUser(rid){
+	$("li[data-id='r"+rid+"']").remove();
+	$("div[data-chat='r"+rid+"']").remove();
+	$(".person").eq(0).click();
+	var id=$(".uid").text();
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		url:"http://localhost:1101/c/rmRoom/"+id+"/"+rid,
+		async: false,
+		success:function(){
+		},
+	});
 }
