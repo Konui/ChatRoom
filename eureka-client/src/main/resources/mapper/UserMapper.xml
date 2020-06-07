@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zzu.chatroom.eurekaclient.dao.UserDao">
+
+    <resultMap id="userAll" type="zzu.chatroom.common.Entity.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="headimg" property="headimg"/>
+        <collection property="friendList" ofType="zzu.chatroom.common.Entity.User">
+            <id column="fid" property="id"/>
+            <result column="fname" property="name"/>
+            <result column="fheadimg" property="headimg"/>
+        </collection>
+    </resultMap>
+
+    <insert id="createUser">
+        insert into user (name,password)values(#{name},#{password});
+    </insert>
+
+    <select id="checkPw" resultType="java.lang.Boolean">
+        select * from user where name=#{name} and password=#{pw};
+    </select>
+
+    <update id="rePw">
+        update user set password = #{pw} where id=#{id};
+    </update>
+
+    <!--    <select id="getUser" resultType="zzu.chatroom.common.Entity.User">-->
+    <!--        select * from user where id=#{id}-->
+    <!--    </select>-->
+
+    <insert id="addFriend">
+        insert into friends (uid1,uid2)values(#{uid1},#{uid2});
+        insert into friends (uid1,uid2)values(#{uid2},#{uid1});
+    </insert>
+
+    <delete id="delFriend">
+        delete from friends where uid1=#{uid1} and uid2=#{uid2};
+        delete from friends where uid1=#{uid2} and uid2=#{uid1};
+    </delete>
+
+
+    <select id="getUser" resultMap="userAll">
+        SELECT u.*,f.uid2 as fid,u2.`name` as fname,u2.headimg as fheadimg FROM `user` u left JOIN friends f ON u.id=f.uid1 LEFT JOIN `user` u2
+        on f.uid2=u2.id where u.name=#{name};
+    </select>
+    <select id="getName" resultType="java.lang.String">
+        select name from user where id=#{id};
+    </select>
+    <select id="getUserById" resultMap="userAll">
+        SELECT u.*,f.uid2 as fid,u2.`name` as fname ,u2.headimg as fheadimg FROM `user` u left JOIN friends f ON u.id=f.uid1 LEFT JOIN `user` u2
+        on f.uid2=u2.id where u.id=#{id};
+    </select>
+
+    <update id="updateHeadImg">
+        update user set headimg = #{url} where id = #{id};
+    </update>
+</mapper>

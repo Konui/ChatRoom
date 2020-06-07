@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>在线聊天室</title>
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/login.css">
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<style type="text/css">
+	.redpoint{
+		height:16px;
+		width:16px;
+		border-radius:16px;
+		display:inline-block;
+		text-align:center;
+		color:#fff;
+		background:red;
+	}
+	.menu a{
+		text-decoration: none;
+		color: black;
+	}
+	.menu a:link{
+		color: black;
+	}
+	.lname{
+		margin: 5px;
+		padding-left: 10px;
+		margin-bottom: -3px;
+	}
+	.rname{
+		margin: 5px;
+		padding-right: 10px;
+		margin-bottom: -3px;
+		text-align: right;
+	}
+</style>
+
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="container">
+        <div class="left">
+            <div class="top">
+				<img id="headimg" src="img/user.jpg" class="headImg">
+                <span class="uid" hidden></span>
+                <span class="uname"></span>
+                <div class="menu">
+					<ul>
+						<li><a href="javascript:addFriend()">添加好友</a></li>
+						<li><a href="javascript:addRoom()">添加群组</a></li>
+						<li><a href="javascript:createRoom()">创建群聊</a></li>
+<!--						<li><a href="javascript:rePw()">修改密码</a></li>-->
+						<li><a href="javascript:reImg()">修改头像</a></li>
+						<li><a href="javascript:exit()">退出</a></li>
+					</ul>
+				</div>
+            </div>
+				<ul class="people">
+
+				</ul>
+        </div>
+        <div class="right">
+			<div class="top"><b><span class="tname" style="color: black"></span></b>
+				<div style="display:inline-block;float:right"><a id="rm" href="#" title="删除"><img src="img\rm.png"></a></div>
+			</div>
+
+
+
+            <div class="write">
+               <!--  <a href="javascript:;" class="write-link attach"></a> -->
+                <input id="msg" type="text"/>
+				
+<!--                <a href="javascript:;" class="write-link smiley"></a>-->
+				<a href="javascript:cuploadImg();" class="write-link img" title="图片"></a>
+				<a href="javascript:cuploadFile();" class="write-link file" title="文件"></a>
+				<a href="javascript:sendMsg();" class="write-link send" title="发送"></a>
+            </div>
+        </div>
+		<input type="file" id="file" name="file" style="display:none;" onchange="reHImg()"/>
+		<input type="file" id="file1" name="file1" style="display:none;" onchange="uploadImg()"/>
+		<input type="file" id="file2" name="file2" style="display:none;" onchange="uploadFile()"/>
+    </div>
+	<div class="loginwarrp" style="display:none;">
+		<div class="logo">登陆</div>
+        <div class="login_form">
+			<form id="Login" name="Login" method="post" onsubmit="" action="">
+				<li><span id="error" style="color:red;"></span></li>
+				<li class="login-item">
+					<span>用户名：</span>
+					<input type="text" id="username" name="name" class="login_input" >
+                                        <span id="count-msg" class="error"></span>
+				</li>
+				<li class="login-item">
+					<span>密　码：</span>
+					<input type="password" id="password" name="password" class="login_input" >
+                                        <span id="password-msg" class="error"></span>
+				</li>
+
+				<li class="login-sub">
+					<input type="button" onclick="login()" value="登录" />
+                    <input type="reset" onclick="zhuce()" value="注册" />
+				</li>                      
+           </form>
+		</div>
+	</div>
+</div>
+
+<script  src="js/api.js"></script>
+<script src="js/jquery.md5.js"></script>
+</body>
+</html>

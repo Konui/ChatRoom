@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zzu.chatroom.eurekaclient.dao.MessageDao">
+    <insert id="insertMsg">
+        insert into message
+        (room_id,type,from_uid,to_uid,content,time)values(#{roomid},#{type},#{fromid},#{toid},#{content},#{time});
+    </insert>
+
+    <select id="getRoomMsg" resultType="zzu.chatroom.common.Entity.Message">
+        select * from message where room_id=#{id};
+    </select>
+
+    <select id="getUserMsg" resultType="zzu.chatroom.common.Entity.Message">
+        select * from message where from_uid=#{uid} and to_uid=#{fid} or from_uid=#{fid} and to_uid=#{uid};
+    </select>
+
+    <delete id="delMsg">
+        delete from message where id = #{id};
+    </delete>
+
+</mapper>

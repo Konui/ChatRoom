@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zzu.chatroom.eurekaclient.dao.RoomDao">
+
+    <resultMap id="roomAll" type="zzu.chatroom.common.Entity.Room">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="owner_id" property="admin_uid"/>
+    </resultMap>
+
+    <select id="getRoom" resultType="zzu.chatroom.common.Entity.Room">
+        select * from room where name=#{name};
+    </select>
+    <select id="getRoombyId" resultType="zzu.chatroom.common.Entity.Room">
+        select * from room where id=#{id};
+    </select>
+    <insert id="createRoom">
+        insert into room (name,owner_id)values(#{name},#{uid});
+    </insert>
+
+    <update id="reRoomName">
+        update room set name = #{name} where id=#{id};
+    </update>
+
+    <delete id="delRoom">
+        delete from room where id=#{id};
+    </delete>
+
+    <insert id="addUser">
+        insert into room_member (room_id,uid)values(#{rid},#{uid});
+    </insert>
+
+    <delete id="delUser">
+        delete from room_member where room_id=#{rid} and uid=#{uid};
+    </delete>
+
+    <select id="getRoomAll" resultMap="roomAll">
+        select r.* ,u.id as uid ,u.name as uname from room r left join room_member rm on r.id=rm.room_id left JOIN
+        `user` u on u.id = rm.uid where r.id=#{id};
+    </select>
+    <select id="getUserRoom" resultMap="roomAll">
+        select r.* from room_member m LEFT JOIN room r on m.room_id=r.id where m.uid=#{uid};
+    </select>
+</mapper>
