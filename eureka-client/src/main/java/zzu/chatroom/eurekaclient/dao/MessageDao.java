@@ -2,6 +2,7 @@ package zzu.chatroom.eurekaclient.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 import zzu.chatroom.common.Entity.Message;
 
 import java.util.Date;
