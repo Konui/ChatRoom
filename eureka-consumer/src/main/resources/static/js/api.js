@@ -39,7 +39,7 @@ function connect(un){
 			res=JSON.parse(evt.data);
 			var cont;
 			if(res["type"]=="img"){
-				"<a href='"+res["content"]+"' target=\"_blank\"><img src='"+res["content"]+"' width=\"150\" height=\"150\"/></a>";
+				cont="<a href='"+res["content"]+"' target=\"_blank\"><img src='"+res["content"]+"' width=\"150\" height=\"150\"/></a>";
 			}else if(res["type"]=="file"){
 				cont="<a href='"+ res["content"]+"' target=\"_blank\" download>文件下载</a>";
 			}else if(res["type"]=="del") {

@@ -68,6 +68,12 @@ public class WebSocketServer {
         if("msg".equals(type)){
             log.info("WSport:"+serverPort+"的用户"+this.uid+"发送信息:"+msg);
             redisService.sendToPub(msg);
+        }else if("img".equals(type)){
+            log.info("WSport:"+serverPort+"的用户"+this.uid+"发送信息:"+msg);
+            redisService.sendToPub(msg);
+        }else if("file".equals(type)){
+            log.info("WSport:"+serverPort+"的用户"+this.uid+"发送信息:"+msg);
+            redisService.sendToPub(msg);
         }
         else if("init".equals(type)){
             this.sendMsg(redisService.initList(this.uid));
