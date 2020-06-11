@@ -12,6 +12,9 @@ import zzu.chatroom.eurekaclient.service.MsgService;
 import zzu.chatroom.eurekaclient.service.RedisService;
 import zzu.chatroom.eurekaclient.service.RoomService;
 import zzu.chatroom.eurekaclient.service.UserService;
+
+import java.util.Map;
+
 @Slf4j
 @RestController
 public class UserController {
@@ -23,6 +26,9 @@ public class UserController {
     RedisService redisService;
     @Autowired
     MsgService msgService;
+
+
+
 
     //创建用户
     @PostMapping("/user")
@@ -113,6 +119,7 @@ public class UserController {
             User u=new User();
             u.setId(uid);
             u=userService.getUserById(u);
+            roomService.addUser(u.getId(),name);
             redisService.addUserToRoom(roomService.getRoom(name),u);
             return true;
         }
@@ -136,5 +143,10 @@ public class UserController {
     @GetMapping(value = "/headimg",consumes = "application/json")
     public boolean updateHeadImg(@RequestParam(value = "id") Long id, @RequestParam("url") String url){
         return userService.updateHeadImg(id,url);
+    }
+
+    @GetMapping(value ="/onlinemeb", consumes = "application/json")
+    public Map<String,String> getOnlineMeb(){
+        return redisService.getOnlineRoom();
     }
 }

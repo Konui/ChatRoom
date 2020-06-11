@@ -591,3 +591,44 @@ function delRoomUser(rid){
 		},
 	});
 }
+
+function onlineon(){
+	$('#onlinemeb').css('visibility','visible');
+
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		url:"http://localhost:1101/c/onlinemeb",
+		success:function(res){
+			for(key in res.data){
+				let z=res.data[key].split("-");
+				let li="<li><a href=\"javascript:addRoombyOnline("+z[1]+",'"+z[0]+"')\">"+z[0]+"("+z[2]+")</a></li>";
+				$("#roomonlinelist").append(li);
+			}
+		},
+	});
+
+}
+function onlineoff(){
+	$("#roomonlinelist").empty();
+	$('#onlinemeb').css('visibility','hidden');
+}
+function addRoombyOnline(id,name){
+		var id=$(".uid").text();
+		$.ajax({
+			type:"get",
+			dataType:"json",
+			url:"http://localhost:1101/c/addroom/"+id+"/"+name,
+			success:function(result){
+				if(result.code==200){
+					alert("添加成功");
+					$('#onlinemeb').css('visibility','hidden');
+				}else{
+					$("#error").text(result.data.msg);
+				}
+			},
+			error: function(){
+				alert("添加出错");
+			}
+		});
+}

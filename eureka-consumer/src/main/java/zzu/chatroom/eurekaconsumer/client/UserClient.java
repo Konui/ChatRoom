@@ -7,6 +7,8 @@ import zzu.chatroom.common.Entity.Message;
 import zzu.chatroom.common.Entity.Room;
 import zzu.chatroom.common.Entity.User;
 
+import java.util.Map;
+
 @FeignClient("eureka-client")
 public interface UserClient {
     //
@@ -39,4 +41,6 @@ public interface UserClient {
     boolean delFriend(@PathVariable("uid")Long uid,@PathVariable("fid")Long fid);
     @GetMapping(value = "/rmRoom/{uid}/{rid}",consumes = "application/json")
     boolean delRoomUser(@PathVariable("uid")Long uid,@PathVariable("rid")Long rid);
+    @GetMapping(value = "/onlinemeb", consumes = "application/json")
+    Map<String,String> getOnlineMeb();
 }

@@ -39,6 +39,28 @@
 		text-align: right;
 	}
 
+	#onlinemeb {
+		padding:10px;
+		position:absolute;
+		left:40%;
+		top:20%;
+		background-color:white;
+		border: 3px solid black;
+		width:200px;
+		height:500px;
+		z-index:4;
+		text-align:center;
+		overflow:auto;
+	}
+	#onlinemeb li{
+		margin:10px;
+		margin-left:10px;
+
+	}
+
+	#roomonlinelist a {
+		text-decoration: none;
+	}
 
 </style>
 
@@ -58,6 +80,7 @@
 						<li><a href="javascript:addRoom()">添加群组</a></li>
 						<li><a href="javascript:createRoom()">创建群聊</a></li>
 <!--						<li><a href="javascript:rePw()">修改密码</a></li>-->
+						<li><a href="javascript:onlineon()">查看在线群组</a></li>
 						<li><a href="javascript:reImg()">修改头像</a></li>
 						<li><a href="javascript:exit()">退出</a></li>
 					</ul>
@@ -110,6 +133,13 @@
 				</li>                      
            </form>
 		</div>
+	</div>
+
+	<div id="onlinemeb" style="visibility:hidden;">
+		<div class="top" style="height:25px;line-height:25px;">当前在线群组<a href="javascript:onlineoff()" style="float:right;"><img src="img/rm.png"/></a></div>
+		<ul id="roomonlinelist">
+
+		</ul>
 	</div>
 </div>
 

@@ -11,9 +11,7 @@ import zzu.chatroom.common.Entity.initList;
 import zzu.chatroom.common.Untils.JsonUtil;
 import zzu.chatroom.eurekaclient.dao.MessageDao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -22,6 +20,8 @@ public class RedisService {
     RedisTemplate  redisTemplate;
     @Autowired
     MessageDao messageDao;
+    @Autowired
+    RoomService roomService;
 
     //上线
     public void addRoom(Room room,User user){
@@ -78,6 +78,21 @@ public class RedisService {
             redisTemplate.opsForList().remove(RedisName.FRIENDS_ID+friend.getId(),1,initList.UsertoList(user));
         }
     }
+
+    public Map<String,String> getOnlineRoom(){
+        Map<String,String> map=new HashMap<>();
+        Set<String> roomlist=redisTemplate.keys("ROOM_ID*");
+        for (String str : roomlist) {
+            Long n=redisTemplate.opsForSet().size(str);
+            if(n>0){
+                String id=str.replaceAll("ROOM_ID","");
+                Room r=roomService.getRoom(Long.parseLong(id));
+                map.put(r.getName(),r.getName()+"-"+r.getId()+"-"+n);
+            }
+        }
+        return map;
+    }
+
 
     public void delRoom(Room room){
         redisTemplate.delete(RedisName.ROOM_ID+room.getId());

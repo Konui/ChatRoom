@@ -146,4 +146,13 @@ public class UserController {
         return msg;
     }
 
+    @GetMapping("/onlinemeb")
+    public ResponseMsg getOnlineMeb(){
+        ResponseMsg msg=new ResponseMsg();
+        msg.setCode(200);
+        msg.setData(userService.getOnlienMeb());
+        return msg;
+    }
+
+
 }

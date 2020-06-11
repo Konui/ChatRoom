@@ -8,6 +8,8 @@ import zzu.chatroom.common.Entity.Room;
 import zzu.chatroom.common.Entity.User;
 import zzu.chatroom.eurekaconsumer.client.UserClient;
 
+import java.util.Map;
+
 @Component
 public class UserService {
     @Autowired
@@ -43,6 +45,8 @@ public class UserService {
     public boolean delRoomUser(Long uid,Long rid){
         return userClient.delRoomUser(uid,rid);
     }
+    public Map<String,String> getOnlienMeb(){return userClient.getOnlineMeb();}
+
     /*
     public String fallback(User user){
         return "当前服务繁忙，请稍后重试。";
