@@ -32,6 +32,7 @@ public class FileController {
             msg.setCode(400);
             msg.setMsg("上传出错！");
         }
+        log.info(String.valueOf(msg.getCode()));
         return msg;
     }
 
@@ -48,6 +49,7 @@ public class FileController {
             msg.setCode(400);
             msg.setMsg("上传出错！");
         }
+        log.info(String.valueOf(msg.getCode()));
         return msg;
     }
 

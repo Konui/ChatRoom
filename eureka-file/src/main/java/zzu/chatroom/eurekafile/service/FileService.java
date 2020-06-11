@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -41,10 +42,6 @@ public class FileService {
         String url="";
         try {
             String type=file.getContentType();
-            BufferedImage img= ImageIO.read(file.getInputStream());
-            if(img==null){
-                log.info("文件为空");
-            }
             //用户名加head
             File f=new File("F:\\Temp\\"+uid.toString()+getTimeName(uid)+file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1));
             file.transferTo(f);

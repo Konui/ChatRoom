@@ -463,10 +463,7 @@ function reHImg(){
 	})
 }
 
-function exit(){
-	ws.close();
-	location.reload();
-}
+
 
 function sendImg(url){
 	//图片大小
@@ -631,4 +628,9 @@ function addRoombyOnline(id,name){
 				alert("添加出错");
 			}
 		});
+}
+
+function exit(){
+    ws.close();
+    location.reload();
 }

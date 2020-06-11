@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RedisListenerBean {
-    @Value("${server.port}")
-    private String serverPort;
+
 
     @Value("${redis.channel.msgToAll}")
     private String msgToAll;

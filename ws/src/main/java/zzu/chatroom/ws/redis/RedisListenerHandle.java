@@ -13,8 +13,7 @@ import zzu.chatroom.ws.Service.chatService;
 @Component
 public class RedisListenerHandle extends MessageListenerAdapter {
 
-    @Value("${server.port}")
-    private String serverPort;
+
 
     @Value("${redis.channel.msgToAll}")
     private String msgToAll;
