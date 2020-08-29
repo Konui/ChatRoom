@@ -59,6 +59,8 @@ function connect(un){
 					if($("li[data-id='"+id+"']").attr("class")=="person"){
 						$("li[data-id='"+id+"']").children(".redpoint").text(parseInt(i)+1);
 						$("li[data-id='"+id+"']").children(".redpoint").show();
+					}else{
+						zd();
 					}
 				}
 				resort();
@@ -109,6 +111,7 @@ function connect(un){
 				$("#rm").attr("href","javascript:"+fn+";");
 				$(this).children(".redpoint").text("0");
 				$(this).children(".redpoint").hide();
+				zd();
 			});
 			resort();
 			//显示第一个聊天框
@@ -633,4 +636,7 @@ function addRoombyOnline(id,name){
 function exit(){
     ws.close();
     location.reload();
+}
+function zd(){
+	$('.chat-active-chat').scrollTop( $('.chat-active-chat')[0].scrollHeight);
 }
